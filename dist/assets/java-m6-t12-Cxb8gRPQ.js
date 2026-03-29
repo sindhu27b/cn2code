@@ -1,3 +1,0 @@
-const e=`# 'final' Keyword | Variables, Methods & Classes
-
-Content for this topic is being prepared. Master your skills one step at a time!`;export{e as CONTENT};
