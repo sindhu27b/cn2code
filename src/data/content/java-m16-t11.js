@@ -1,0 +1,3 @@
+export const CONTENT = `# Clean Code Principles | Readable & Maintainable
+
+Content for this topic is being prepared. Master your skills one step at a time!`;

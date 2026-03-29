@@ -1,0 +1,3 @@
+export const CONTENT = `# Chat App: Private & Group Messaging
+
+Content for this topic is being prepared. Master your skills one step at a time!`;

@@ -1,0 +1,3 @@
+export const CONTENT = `# JdbcTemplate Introduction | Core Class
+
+Content for this topic is being prepared. Master your skills one step at a time!`;

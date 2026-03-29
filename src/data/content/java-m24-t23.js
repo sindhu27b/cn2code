@@ -1,0 +1,3 @@
+export const CONTENT = `# Building a Web Application Practice | Complete Project
+
+Content for this topic is being prepared. Master your skills one step at a time!`;

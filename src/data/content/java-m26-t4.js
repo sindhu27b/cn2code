@@ -1,0 +1,3 @@
+export const CONTENT = `# RESTful Web Services | Stateless Communication
+
+Content for this topic is being prepared. Master your skills one step at a time!`;

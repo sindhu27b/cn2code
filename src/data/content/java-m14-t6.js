@@ -1,0 +1,3 @@
+export const CONTENT = `# Streams API Introduction | Processing Collections
+
+Content for this topic is being prepared. Master your skills one step at a time!`;

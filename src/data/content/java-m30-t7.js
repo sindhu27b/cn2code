@@ -1,0 +1,3 @@
+export const CONTENT = `# Eureka Server Setup | Registration Server
+
+Content for this topic is being prepared. Master your skills one step at a time!`;
