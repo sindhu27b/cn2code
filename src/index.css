@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 @theme {
-  --font-sans: "Inter", "Outfit", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900;
+    @apply bg-slate-50 text-slate-900 antialiased;
   }
 }
 
@@ -20,6 +23,11 @@
   .animation-delay-4000 {
     animation-delay: 4s;
   }
+  .text-gradient {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 @keyframes blob {
@@ -29,10 +37,10 @@
   100% { transform: translate(0px, 0px) scale(1); }
 }
 
-/* Custom scrollbar for webkit */
+/* Premium scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -40,10 +48,74 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+  background: #94a3b8;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #64748b;
 }
+
+/* Sidebar scrollbar */
+aside::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
+
+aside::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+/* Smooth transitions */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Details element animation */
+details[open] > *:not(summary) {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Remove default details marker */
+details summary::-webkit-details-marker {
+  display: none;
+}
+details summary::marker {
+  display: none;
+  content: '';
+}
+
+/* Pad content inside details (everything except summary) */
+.details-padded > *:not(summary) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.details-padded > *:last-child {
+  padding-bottom: 1.25rem;
+}
+
+/* Remove gap between adjacent collapsed details sections */
+.details-padded + .details-padded {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: none;
+}
+.details-padded:has(+ .details-padded) {
+  margin-bottom: 0 !important;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+

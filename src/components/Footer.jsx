@@ -1,54 +1,96 @@
-import { Youtube, Zap } from 'lucide-react';
+import { Youtube, Zap, Heart, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-100 border-t border-slate-200 pt-10 pb-6">
-      <div className="max-w-6xl mx-auto px-8 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <footer className="bg-slate-950 text-white">
+      <div className="max-w-6xl mx-auto px-8 pt-16 pb-8">
+        {/* Top Section */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-14">
           
-          <div className="md:col-span-1 space-y-4">
-            <div className="flex items-center space-x-2 text-indigo-600">
-              <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-200">
+          {/* Brand */}
+          <div className="md:col-span-5 space-y-5">
+            <Link to="/" className="flex items-center space-x-2.5 group">
+              <div className="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
                 <Zap className="text-white w-5 h-5 fill-white/20" />
               </div>
-              <span className="font-bold text-xl tracking-tight text-slate-900">cn2code</span>
-            </div>
-            <p className="text-slate-500 text-sm leading-relaxed">
-              Empowering developers worldwide with world-class, premium courses and interactive learning experiences. Master the skills that matter.
+              <span className="font-black text-xl tracking-tight text-white">cn2code</span>
+            </Link>
+            <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
+              Structured, project-based learning paths for developers. 
+              Free forever — no paywalls, no subscriptions.
             </p>
+            {/* YouTube Button */}
+            <a
+              href="https://www.youtube.com/@cn2tech27"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm font-semibold text-slate-300 hover:bg-red-500/10 hover:border-red-500/30 hover:text-red-400 transition-all group"
+            >
+              <Youtube size={18} />
+              <span>Subscribe on YouTube</span>
+              <ArrowUpRight size={14} className="opacity-50 group-hover:opacity-100 transition-opacity" />
+            </a>
           </div>
 
-          <div>
-            <h3 className="font-bold text-slate-800 mb-4 tracking-wide uppercase text-xs">Platform</h3>
+          {/* Quick Links */}
+          <div className="md:col-span-3">
+            <h4 className="text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase mb-5">Courses</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-slate-500 hover:text-indigo-600 text-sm transition-colors">Browse Courses</a></li>
-              <li><a href="#" className="text-slate-500 hover:text-indigo-600 text-sm transition-colors">Success Stories</a></li>
-              <li><a href="#" className="text-slate-500 hover:text-indigo-600 text-sm transition-colors">FAQ</a></li>
+              <li>
+                <Link to="/java" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors flex items-center gap-2 group">
+                  <span className="w-1 h-1 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  Java & Spring Boot
+                </Link>
+              </li>
+              <li>
+                <span className="text-slate-600 text-sm flex items-center gap-2">
+                  <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
+                  Angular
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded">Soon</span>
+                </span>
+              </li>
+              <li>
+                <span className="text-slate-600 text-sm flex items-center gap-2">
+                  <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
+                  Git & Version Control
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded">Soon</span>
+                </span>
+              </li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-bold text-slate-800 mb-4 tracking-wide uppercase text-xs">Connect With Us</h3>
-            <div className="flex space-x-4">
-              <a 
-                href="https://www.youtube.com/@cn2tech27" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-rose-100 hover:text-rose-600 transition-colors shadow-sm"
-              >
-                <Youtube size={20} />
-              </a>
-            </div>
+          {/* Resources */}
+          <div className="md:col-span-4">
+            <h4 className="text-[10px] font-black tracking-[0.2em] text-slate-500 uppercase mb-5">Connect</h4>
+            <ul className="space-y-3">
+              <li>
+                <a 
+                  href="https://www.youtube.com/@cn2tech27" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-red-400 text-sm transition-colors flex items-center gap-2 group"
+                >
+                  <span className="w-1 h-1 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  YouTube Channel
+                  <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400">
-          <p>© {new Date().getFullYear()} cn2code. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-slate-600 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-slate-600 transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-slate-600 transition-colors">Cookie Policy</a>
-          </div>
+        {/* Divider */}
+        <div className="border-t border-white/5"></div>
+
+        {/* Bottom Bar */}
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p className="text-[12px] text-slate-600">
+            © {new Date().getFullYear()} cn2code. All rights reserved.
+          </p>
+          <p className="text-[12px] text-slate-700 flex items-center gap-1">
+            Built with <Heart size={10} className="text-red-500 fill-red-500" /> for developers everywhere
+          </p>
         </div>
       </div>
     </footer>

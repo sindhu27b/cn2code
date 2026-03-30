@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, ChevronRight, Layers, FileText, Grid } from 'lucide-react';
 
-export default function Sidebar({ course, selectedTopicId, onSelectTopic }) {
+export default function Sidebar({ course, selectedTopicId, onSelectTopic, isOpen = true }) {
   const [expandedModules, setExpandedModules] = useState([]);
 
   // Auto-expand module containing selected topic
@@ -25,20 +25,21 @@ export default function Sidebar({ course, selectedTopicId, onSelectTopic }) {
   if (!course) return null;
 
   return (
-    <aside className="w-80 bg-white border-r border-slate-200 h-[calc(100vh-56px)] overflow-y-auto flex flex-col shrink-0">
-      <div className="p-4 border-b border-indigo-50 bg-indigo-50/50 sticky top-0 z-10 flex items-center justify-between shadow-sm">
-        <label className="text-xs font-black tracking-widest text-indigo-700 uppercase flex items-center gap-2">
-          <Grid size={14} className="text-indigo-400" />
+    <aside className={`bg-slate-900 h-[calc(100vh-56px)] overflow-y-auto flex flex-col shrink-0 transition-all duration-300 ease-in-out ${isOpen ? 'w-80 opacity-100' : 'w-0 opacity-0 overflow-hidden'}`}>
+      {/* Header */}
+      <div className="p-4 border-b border-slate-700/50 bg-slate-800/50 sticky top-0 z-10 flex items-center justify-between backdrop-blur-sm">
+        <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase flex items-center gap-2">
+          <Grid size={13} className="text-emerald-500" />
           Course Plan
         </label>
-        <div className="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-full font-bold">
+        <div className="bg-emerald-500/10 text-emerald-400 text-[10px] px-2.5 py-1 rounded-full font-bold border border-emerald-500/20">
           {course.modules?.length || 0} Modules
         </div>
       </div>
 
-      <nav className="p-3 space-y-1">
+      <nav className="p-2.5 space-y-0.5 flex-1">
         {(!course.modules || course.modules.length === 0) && (
-          <div className="p-4 text-center text-sm text-slate-400 border border-dashed rounded-lg bg-slate-50 mt-4">
+          <div className="p-4 text-center text-sm text-slate-500 border border-dashed border-slate-700 rounded-lg bg-slate-800/50 mt-4">
             No modules available in this course.
           </div>
         )}
@@ -48,33 +49,31 @@ export default function Sidebar({ course, selectedTopicId, onSelectTopic }) {
           const hasSelectedTopic = mod.topics?.some(t => t.id === selectedTopicId);
 
           return (
-            <div key={mod.id} className="mb-1">
+            <div key={mod.id} className="mb-0.5">
               <button
                 onClick={() => toggleModule(mod.id)}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-sm transition-all shadow-sm ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-[13px] transition-all ${
                   hasSelectedTopic 
-                    ? 'bg-gradient-to-r from-indigo-50 to-indigo-100/50 font-semibold text-indigo-900 border border-indigo-200 shadow-indigo-100' 
-                    : 'bg-white hover:bg-slate-50 text-slate-700 border border-transparent hover:border-slate-200'
+                    ? 'bg-emerald-500/10 font-semibold text-emerald-300 border border-emerald-500/20' 
+                    : 'hover:bg-slate-800 text-slate-300 border border-transparent hover:border-slate-700/50'
                 }`}
               >
-                <div className="flex items-center space-x-3 text-left pr-2">
-                  <div className={`p-1.5 rounded-md ${hasSelectedTopic ? 'bg-indigo-200/50 text-indigo-700' : 'bg-slate-100 text-slate-500'}`}>
-                    <Layers size={14} />
+                <div className="flex items-center space-x-2.5 text-left pr-2">
+                  <div className={`p-1 rounded-md ${hasSelectedTopic ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-500'}`}>
+                    <Layers size={13} />
                   </div>
                   <span className="line-clamp-2 leading-tight flex-1">{mod.title}</span>
                 </div>
                 {mod.topics && mod.topics.length > 0 && (
                   isModuleExpanded 
-                    ? <ChevronDown size={18} className={`shrink-0 ${hasSelectedTopic ? 'text-indigo-600' : 'text-slate-400'}`} /> 
-                    : <ChevronRight size={18} className={`shrink-0 ${hasSelectedTopic ? 'text-indigo-600' : 'text-slate-400'}`} />
+                    ? <ChevronDown size={16} className={`shrink-0 ${hasSelectedTopic ? 'text-emerald-400' : 'text-slate-500'}`} /> 
+                    : <ChevronRight size={16} className={`shrink-0 ${hasSelectedTopic ? 'text-emerald-400' : 'text-slate-500'}`} />
                 )}
               </button>
 
               {/* Topics Level */}
               {isModuleExpanded && mod.topics && (
-                <div className="mt-2 ml-[19px] pl-[18px] border-l-2 border-slate-100 space-y-1 mb-3 relative">
-                  <div className="absolute inset-y-0 left-[-2px] w-[2px] bg-gradient-to-b from-indigo-200 via-indigo-100 to-transparent transition-all" />
-                  
+                <div className="mt-1 ml-[18px] pl-4 border-l border-slate-700/50 space-y-0.5 mb-2">
                   {mod.topics.map((topic) => {
                     const isTopicSelected = selectedTopicId === topic.id;
 
@@ -82,13 +81,13 @@ export default function Sidebar({ course, selectedTopicId, onSelectTopic }) {
                       <button
                         key={topic.id}
                         onClick={() => onSelectTopic(topic.id)}
-                        className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-left transition-all ${
+                        className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] text-left transition-all ${
                           isTopicSelected
-                            ? 'bg-indigo-600 text-white font-medium shadow-md shadow-indigo-200 translate-x-1'
-                            : 'hover:bg-indigo-50 hover:text-indigo-800 text-slate-500 hover:translate-x-1'
+                            ? 'bg-emerald-500 text-white font-medium shadow-lg shadow-emerald-500/20'
+                            : 'hover:bg-slate-800/80 text-slate-400 hover:text-slate-200'
                         }`}
                       >
-                        <FileText size={14} className={`shrink-0 ${isTopicSelected ? 'text-indigo-200' : 'text-slate-300'}`} />
+                        <FileText size={13} className={`shrink-0 ${isTopicSelected ? 'text-emerald-100' : 'text-slate-600'}`} />
                         <span className="line-clamp-2 leading-snug">{topic.title}</span>
                       </button>
                     );

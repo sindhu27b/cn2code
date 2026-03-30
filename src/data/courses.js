@@ -864,10 +864,10 @@ export const courses = [
     id: 'java',
     title: 'Java & Spring Boot',
     modules: parsedModules.map((m, i) => ({
-      id: `java-m${i+1}`,
+      id: `java-m${i + 1}`,
       title: m.title,
       topics: m.topics.map((t, j) => {
-        const topicId = `java-m${i+1}-t${j+1}`;
+        const topicId = `java-m${i + 1}-t${j + 1}`;
         return {
           id: topicId,
           title: t.title,
